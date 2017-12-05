@@ -1,0 +1,22 @@
+﻿@model List<book_storage.Models.BookReview>
+@using book_storage
+
+
+
+
+@foreach (var review in Model)
+{
+    if (!@review.IsOffensive) { 
+        <p>
+            <strong>
+                @Html.DisplayFor(m => review.Name):
+            </strong>
+             @Html.DisplayFor(m => review.Review)
+            <button type="button" class="report-btn" data-review="@review.Id"><span class="glyphicon glyphicon-exclamation-sign"></span></button>
+            <button type="button" class="like-btn" data-review="@review.Id"><span class="glyphicon glyphicon-thumbs-up"></span> Мне нравится! <span class="like"> @Html.DisplayFor(m => review.Likes) </span></button>
+        </p>
+            <hr />
+    }
+}
+<script src="~/Scripts/addReport.js"></script>
+<script src="~/Scripts/addLike.js"></script>

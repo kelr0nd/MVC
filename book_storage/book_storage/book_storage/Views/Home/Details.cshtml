@@ -1,0 +1,48 @@
+﻿@model book_storage.Models.Book
+@using book_storage
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+
+</script>
+<div class="row">
+    <div class="col-md-8">
+        @*<div class="display-label">
+            <h2>@Html.DisplayNameFor(model => model.Name)</h2>
+        </div>
+        <div class="display-field">
+            <h2>@Html.DisplayFor(model => model.Name)</h2>
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Genre)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Genre)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Author)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Author)
+        </div>*@
+
+        <h2>Название книги: @Model.Name</h2>
+        <p>Жанр: @Model.Genre</p>
+        <p>Автор:  @Model.Author</p>
+        <hr />
+        <p>
+            @Html.ActionLink("Изменить", "EditBook", new { id = Model.Id }) |
+            @Html.ActionLink("Возвратиться", "Index") |
+            @Html.ActionLink("Добавить отзыв", "Create", "Review", new { bookId = Model.Id, BookName = Model.Name }, null)
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h1>Отзывы</h1>
+            @Html.Partial("ReviewPartial", book_storage.Models.BaseTest.instance.Rewiews.Where(x => x.IdBook == Model.Id).ToList())
+        
+    </div>
+</div>

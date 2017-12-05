@@ -1,0 +1,17 @@
+﻿@model  List<book_storage.Models.Book>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    
+    @foreach (var book in Model)
+{
+        <h2>Название книги: @book.Name</h2>
+        <p>Жанр: @book.Genre</p>
+        <p>Автор: @book.Author</p>
+        @Html.ActionLink("Информация", "Details", new { id = book.Id }, null)     
+        <hr />        
+}  
+@Html.ActionLink("Добавить книгу", "../book/CreateBook")  
+
+
