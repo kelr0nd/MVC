@@ -1,0 +1,48 @@
+﻿@model book_storage.Models.IndexListView
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Заголовок</th>
+        <th scope="col">Автор</th>
+        <th scope="col">Описание</th>
+        <th scope="col">Жанр</th>
+        <th scope="col">Кол страниц</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var book in Model.books)
+    {
+        <tr data="@book.Id" onclick="window.location.href='/Book/Details/' + this.getAttribute('data')">
+            <td>@book.Title</td>
+            <td>@book.Author</td>
+            <td>@book.Description</td>
+            <td>@book.Genre</td>
+            <td>@book.Pages</td>
+        </tr>
+    } 
+    </tbody>
+</table>
+<style>
+    tr:hover {
+        cursor: pointer;
+        background: #f0f0f0;
+    }
+</style>
+
+<hr/>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        @foreach (int index in Enumerable.Range(Model.currentPage, 5))
+        {
+            <li class="page-item">
+                @Html.ActionLink(index.ToString(), "List", new {currentPage = index}, new { @class = "page-link" })
+            </li>
+        } 
+    </ul>
+</nav>   
