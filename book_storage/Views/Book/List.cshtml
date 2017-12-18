@@ -38,7 +38,7 @@
 
 <nav aria-label="Page navigation example">
     <ul class="pagination">
-        @foreach (int index in Enumerable.Range(Model.currentPage, 5))
+        @foreach (int index in Enumerable.Range(Model.currentPage, Model.totalPage))
         {
             <li class="page-item">
                 @Html.ActionLink(index.ToString(), "List", new {currentPage = index}, new { @class = "page-link" })
