@@ -26,25 +26,33 @@ namespace book_storage.Controllers
         //
         // GET: /Book/
 
+        
         public ActionResult List(int currentPage = 1)
-        {
-            if (currentPage < 1)
-            {
-                currentPage = 1;
-            }
-            var paginatorNum = currentPage - 2;
-            if (paginatorNum < 1)
-            {
-                paginatorNum = 1;
-            }
-            var indexListView = new IndexListView()
-            {
-                books = _bookContext.GetRange((currentPage - 1) * _PAGE_SIZE, _PAGE_SIZE),
-                currentPage = paginatorNum,
-                totalPage = (int)(_bookContext.Count()/_PAGE_SIZE + 0.5)
-            };
-            return View(indexListView);
-        }    
+	{
+		if (currentPage < 1)
+		{
+			currentPage = 1;
+		}
+		var paginatorNum = currentPage - 2;
+		if (paginatorNum < 1)
+		{
+			paginatorNum = 1;
+		}
+		var pages = _bookContext.Count() / _PAGE_SIZE;
+		pages += (_bookContext.Count() % _PAGE_SIZE == 0 ? 0 : 1);
+		if (pages > 5)
+		{
+			pages = 5;
+		}
+		var indexListView = new IndexListView()
+		{
+			books = _bookContext.GetRange((currentPage - 1) * _PAGE_SIZE, _PAGE_SIZE),
+			currentPage = paginatorNum,
+			totalPage = pages,
+		};
+		return View(indexListView);
+	}
+		
 		
 		public ActionResult Details(int id = 0)
 		{
